@@ -1,4 +1,4 @@
-console.log("JS loaded");
+console.log("JS loadedv test");
 const toggleBtn = document.getElementById("toggleTheme");
 
 toggleBtn.addEventListener("click", () => {
@@ -192,26 +192,22 @@ db.collection("users")
   let unsubscribeMessages = null;
 
 function startChat(listenerId) {
+  const user1 = auth.currentUser.uid;
+  const user2 = listenerId;
 
-  console.log("startChat clicked:", listenerId);
+  // ALWAYS same order (important)
+  const chatId =
+    user1 < user2
+      ? user1 + "_" + user2
+      : user2 + "_" + user1;
 
-  if (!auth.currentUser) {
-    alert("You must be logged in first");
-    return;
-  }
+  currentChat = chatId;
 
-  if (!listenerId) {
-    console.log("No listener selected");
-    return;
-  }
-
-  currentChat = auth.currentUser.uid + "_" + listenerId;
-
-  console.log("currentChat set to:", currentChat);
+  console.log("CHAT ID:", currentChat);
 
   db.collection("chats").doc(currentChat).set({
-    users: [auth.currentUser.uid, listenerId]
-  });
+    users: [user1, user2]
+  }, { merge: true });
 
   loadMessages();
 }
