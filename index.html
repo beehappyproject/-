@@ -299,6 +299,25 @@ body.light .msg-header {
 .msg-name {
   font-weight: 600;
 }
+.logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.logo img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin-bottom: 8px;
+}
+
+.logo h2 {
+  color: #ffd60a;
+  font-size: 18px;
+  margin: 0;
+}
 
 </style>
 </head>
@@ -308,14 +327,16 @@ body.light .msg-header {
 
   <!-- SIDEBAR -->
   <div id="sidebar">
-    <h2>🐝 BeeChat</h2>
+    <div class="logo">
+  <img src="logo.jpeg" alt="logo" />
+  <h2>خوي قلبك</h2>
+</div>
     <button id="toggleTheme">🌗 Mode</button>
     <button id="login">Login</button>
 
     <div id="rooms">
-      <p>💬 General</p>
       <p>🧠 Therapy</p>
-      <p>📚 Study Help</p>
+      <p>💬 Other Bees</p>
     </div>
     <h3>Listeners</h3>
     <div id="listeners"></div>
