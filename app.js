@@ -1,4 +1,5 @@
-console.log("JS loadedv test");
+console.log("APP STARTED");
+console.log("JS loaded");
 const toggleBtn = document.getElementById("toggleTheme");
 
 toggleBtn.addEventListener("click", () => {
@@ -51,7 +52,7 @@ auth.onAuthStateChanged((user) => {
 
     db.collection("users").doc(user.uid).set({
   name: user.displayName,
-  role: "listener"
+  role: user.email === "beehappyprojectucd@gmail.com" ? "listener" : "user"
 }, { merge: true });
 
   }
@@ -106,13 +107,15 @@ function loadMessages() {
       snapshot.forEach(doc => {
         const data = doc.data();
         const li = document.createElement("div");
+        
+
+
 
 if (data.uid === auth.currentUser.uid) {
   li.classList.add("me");
 } else {
   li.classList.add("other");
 }
-
         const time = new Date(data.time).toLocaleTimeString([], {
   hour: "2-digit",
   minute: "2-digit"
@@ -132,14 +135,7 @@ li.innerHTML = `
 
         
 
-        if (data.uid === auth.currentUser.uid) {
-          
-          
-          li.style.marginLeft = "auto";
-        } else {
-        
-          li.style.marginRight = "auto";
-        }
+      
 
         list.appendChild(li);
       });
